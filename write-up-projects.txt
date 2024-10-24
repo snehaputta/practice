@@ -1,0 +1,26 @@
+23-10-2024
+==========
+
+Projects: (parent - client - role)
+=========
+Infosys - Airtel - dev
+Infosys - Directv - test
+Infosys - Bank Of America - dev
+Infosys - Tmobile - testdev
+UST Global - Dell - test
+
+Challenges: (parent - client - challenges)
+===========
+Infosys - Airtel - joined as a juinor, accepted the learning curve of required dev skills, email communication
+Infosys - Directv - multiple stakeholders, time management, handling 2 time zones, onshore calls during day, offshore KT/calls/work at night
+Infosys - Bank Of America - testing to dev transition, no time to brush dev skills
+Infosys - Tmobile - new to BDD no time to skill up on Cucumber but accepted deliverables
+UST Global - Dell - no testing devices from office during COVID, used own devices for testing
+
+Stakeholder: (parent - client - stakeholders)
+============
+Infosys - Airtel - Airtel, Third Parties, Internal, Finacle
+Infosys - Directv - Directv, Third Parties
+Infosys - Bank Of America - not aware except client
+Infosys - Tmobile - not aware except client
+UST Global - Dell - Internal, Customers of Dell
