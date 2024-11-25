@@ -1,0 +1,39 @@
+23-10-2024
+==========
+
+Projects: (parent - client - role)
+=========
+1. Infosys - Airtel - dev
+2. Infosys - Directv - test
+3. Infosys - Bank Of America - dev
+4. Infosys - Tmobile - testdev
+5. UST Global - Dell - test
+
+Challenges: (parent - client - challenges)
+===========
+1. Infosys - Airtel - joined as a juinor, accepted the learning curve of required dev skills, email communication, only a month for entire project code walkthrough
+2. Infosys - Directv - multiple stakeholders, time management, handling 2 time zones, onshore calls during day, offshore KT/calls/work at night
+3. Infosys - Bank Of America - testing to dev transition, no time to brush dev skills
+4. Infosys - Tmobile - new to BDD no time to skill up on Cucumber but accepted deliverables
+5. UST Global - Dell - no testing devices from office during COVID, used own devices for testing
+
+Stakeholder: (parent - client - stakeholders)
+============
+1. Infosys - Airtel - Airtel, Third Parties, Internal, Finacle
+2. Infosys - Directv - Directv, Third Parties
+3. Infosys - Bank Of America - not aware except client
+4. Infosys - Tmobile - not aware except client
+5. UST Global - Dell - Internal, Customers of Dell
+
+Detailed Explanation: 
+=====================
+
+1) Initially, the AirtelMoney project started off in waterfall model and gradually transitioned to Agile with multiple change requests coming in from the client side. I was inducted into the team to take up the maintenance and enhancement requirements. AirtelMoney is a mobile commerce solution ideated and conceptualized by Airtel (a Telecom giant in India) and delivered by Infosys as the IT-solution partner. This solution provides every Airtel userthe ability to securely and conveniently manage utility bill payments (mobile, landline, DSL, DTH), fund-transfers (wallet to wallet, wallet to bank), Over-the-Counter (Point-of-Sale) purchases and purchase of online services (movie tickets, train tickets), etc. As part of the WalletEdge development team, my primary role was to maintain one of the components called Adaptation layer which integrated the core financial component (i.e. FDC - Finacle - Infosys Banking Solution) with the outside world i.e. Remote Merchants (BookMyShow, IRCTC, NammaMetro) and other Third Party Components via SOAP-based web services with the internal Banking Engine, Finacle. Basically, it is the mediator between Finacle and External World - does the handshake, data massaging, transmission as per respective interface specifications. 
+
+2. 
+
+3. 
+
+4. 
+
+5. 
