@@ -111,3 +111,119 @@ Hint: Use GROUP BY with HAVING.
 
 Select d.department_id, d.department_name, AVG(e.salary) AS average_salary FROM departments d join employees e ON d.department_id = e.department_id
 group by d.department_id, d.department_name having COUNT(e.employee_id) > 5;
+
+meetings notes: (12-12-2024)
+===============
+
+interview SQL questions on accounts receivable
+
+generate CSV file with at least 100 to 200 rows of employee data
+generate text file with at least 100 to 200 rows of employee data
+example: 
+name email department salary highest-qualification phone
+
+
+1) In Employees_Projects table some rows reference employees who no longer exist in the employees table. Remove these orphaned rows
+
+DELETE FROM Employees_Projects
+WHERE employee_id NOT IN (SELECT employee_id FROM Employees);
+
+2) Detect Salary gaps
+
+hint: you want to compare the average salary between departments.
+
+SELECT department_id, 
+       AVG(salary) AS avg_salary,
+       (AVG(salary) - (SELECT AVG(salary) FROM Employees)) AS salary_gap
+FROM Employees
+GROUP BY department_id
+ORDER BY salary_gap DESC;
+
+SELECT department_id, 
+       AVG(salary) AS avg_salary,
+       (AVG(salary) - (SELECT AVG(salary) FROM Employees)) AS salary_gap
+FROM Employees
+GROUP BY department_id
+HAVING ABS(AVG(salary) - (SELECT AVG(salary) FROM Employees)) > 5000
+ORDER BY salary_gap DESC;
+
+3) Employees working on more than 1 project
+
+SELECT employee_id, COUNT(DISTINCT project_id) AS project_count
+FROM Employees_Projects
+GROUP BY employee_id
+HAVING COUNT(DISTINCT project_id) > 1;
+
+-- with primary key
+delete from orders where order_id not in (select min(order_id) from orders group by cust_id, order_date);
+
+Order table - ordered custid custdate (custid and custdate should be only once no duplicates)
+
+orderid, custid custdate - query to delete duplicates
+
+create TEMPORARY TABLE duplicates AS(select employee_id,project_id from employees_projects
+group by employee_id,project_id
+having count(*)>1);
+ 
+select employee_id,project_id from duplicates;
+ 
+DELETE FROM employees_projects
+WHERE (employee_id,project_id) In (select employee_id,project_id from duplicates);
+ 
+start TRANSACTION;
+ 
+-- emp_proj_backup_11-12-2024
+create table temp_ep(project_id int, employee_id int);
+ 
+-- with temp_ep_cte as (
+  insert into temp_ep(project_id, employee_id)
+  select project_id, employee_id from (
+    select *, row_number() over(partition by project_id, employee_id) as row_num
+    from employees_projects
+    group by project_id, employee_id) as subquery
+  where row_num = 1;
+-- )
+ 
+-- select * from temp_ep;
+ 
+delete from employees_projects;
+ 
+insert into employees_projects (project_id, employee_id)
+select project_id, employee_id from temp_ep;
+
+--truncate the temp_table
+
+commit;
+
+-- delete from employees_projects
+ 
+Please check code into git
+ 
+Create TEMPORARY TABLE employees_projects_temp
+AS SELECT min(id),project_id, employee_id
+    FROM employees_projects
+    GROUP BY project_id, employee_id
+    HAVING COUNT(*) > 1;
+ 
+ 
+    Delete from employees_projects;
+ 
+ 
+    Insert into employees_projects (id,project_id,employee_id)
+    Select id,project_id,employee_id from employees_projects_temp;
+
+use count with group by for finding duplicates
+
+employees_projects is a table with project_id and employee_id
+
+select employee_id, count(*) from employees_projects group by employee_id having count(*)>1;
+
+employees and projects many to many relationship. 
+
+select e.id, e.first_name, e.last_name, p.id from employees e LEFT JOIN projects p where e.id in p group by e.id; 
+
+select e.id,e.first_name,e.last_name,p.id as project_id,
+ p.title as project_title from employees e join employees_projects
+ep on e.id=ep.employee_id join projects p on ep.project_id=p.id;
+
+left join needs to be applied because it will handle the edge cases where an employee will not have any assigned projects

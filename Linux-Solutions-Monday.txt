@@ -128,3 +128,39 @@ Q20: How do you display the disk usage of the 10 largest directories in the `/us
 using `du`? 
 
 [Ans]: du -h --max-depth=1 /usr | sort -hr | head -n 10
+
+meetings notes: (11-12-2024)
+===============
+
+awk command
+top command
+
+text processing tools - grep, awk, sed
+
+var folder usually contains logs
+
+ls -lrt
+CHMOD number
+vi editor (check commands for deleting lines, copy-pasting, etc.)
+try nano if vi does not work
+shebang #!/bin/bash
+bourne - born again shell
+cat helloworld.sh
+bash helloworld.sh (run directly without upgrading permissions)
+
+Name="Michael"
+echo "Hello, $Name"
+
+symbolic link
+chatgpt for the if conditions by yourself
+cat
+tar
+loops - while versus until
+
+awk
+ps
+ps -eo pid, comm, %cpu
+ps -eo pid, comm, %cpu | awk '$3 > 50 {print $1, $2, $3}'
+ps -eo pid, comm, %cpu | awk '$3 > .4 {print $1, $2, $3}'
+ps -eo pid, comm, %cpu | awk '$3 > .1 {print $1, $2, $3}'
+ps -eo pid, comm, %cpu | awk '$3 > 0 {print $1, $2, $3}'

@@ -278,3 +278,8 @@ Copy code
 Total water trapped: 6
 This is a very efficient solution that calculates the amount of water trapped between buildings using a two-pointer approach in linear time.
 
+meetings notes: (12-12-2024)
+===============
+
+https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/
+
