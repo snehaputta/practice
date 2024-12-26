@@ -1,0 +1,1271 @@
+MySQL ASSIGNMENT QUESTIONS - 17 December, 2024
+##############################################
+
+DDL (Data Definition Language)
+==============================
+
+show databases;
+use mysql;
+show tables;
+
+SET SQL_SAFE_UPDATES = 0; [Reset to 1]
+SET foreign_key_checks = 0; [Reset to 1 after inserting rows into employees and departments - error 1452 resolution]
+
+select * from employees;
+select * from departments;
+select * from projects;
+select * from employee_projects;
+select * from transactions;
+
+[Need to set the foreign key column to null in order to delete the table data]
+update employees set department_id = null;
+update departments set manager_id = null; 
+
+truncate employees; [OR] delete from employees; 
+commit;
+truncate departments; [OR] delete from departments; 
+commit;
+truncate projects; [OR] delete from projects;
+commit;
+truncate employee_projects;
+commit;
+truncate transactions;
+commit;
+
+DML (Data Modification Language)
+================================
+
+-- Add more rows up to 100 with varying departments, hire dates, and salaries.
+(101, 'Kevin', 'Taylor', 2, '2023-08-14', 55000.00)
+
+INSERT INTO Employees (employee_id, first_name, last_name, department_id, hire_date, salary)
+VALUES
+(1, 'John', 'Doe', 1, '2020-01-15', 50000.00),
+(2, 'Jane', 'Smith', 2, '2021-02-22', 55000.00),
+(3, 'Michael', 'Johnson', 3, '2019-11-05', 60000.00),
+(4, 'Emily', 'Williams', 1, '2018-03-13', 45000.00),
+(5, 'David', 'Brown', 4, '2020-07-11', 70000.00),
+(6, 'Sarah', 'Jones', 2, '2022-04-25', 48000.00),
+(7, 'Robert', 'Miller', 3, '2021-06-17', 52000.00),
+(8, 'Maria', 'Davis', 5, '2017-08-03', 75000.00),
+(9, 'James', 'Martinez', 4, '2019-01-12', 60000.00),
+(10, 'Patricia', 'Garcia', 1, '2020-12-30', 51000.00),
+(11, 'Alice', 'Wilson', 6, '2021-03-22', 56000.00),
+(12, 'Tom', 'Moore', 7, '2022-02-13', 47000.00),
+(13, 'Nancy', 'Taylor', 8, '2019-04-05', 64000.00),
+(14, 'Mark', 'Anderson', 9, '2020-06-01', 53000.00),
+(15, 'Susan', 'Thomas', 10, '2018-08-17', 59000.00),
+(16, 'Andrew', 'Jackson', 1, '2021-07-23', 45000.00),
+(17, 'Olivia', 'White', 2, '2022-01-18', 52000.00),
+(18, 'Ethan', 'Harris', 3, '2020-10-14', 61000.00),
+(19, 'Sophia', 'Clark', 4, '2021-04-28', 68000.00),
+(20, 'Mason', 'Lewis', 5, '2019-09-07', 75000.00),
+(21, 'Isabella', 'Young', 6, '2022-11-01', 49000.00),
+(22, 'Lucas', 'King', 7, '2018-02-25', 53000.00),
+(23, 'Amelia', 'Scott', 8, '2020-05-16', 62000.00),
+(24, 'James', 'Adams', 9, '2021-03-30', 54000.00),
+(25, 'Benjamin', 'Baker', 10, '2022-04-18', 67000.00),
+(26, 'Charlotte', 'Nelson', 1, '2019-12-10', 46000.00),
+(27, 'Henry', 'Carter', 2, '2020-08-15', 54000.00),
+(28, 'Amos', 'Morris', 3, '2022-03-05', 58000.00),
+(29, 'Ella', 'Mitchell', 4, '2021-05-12', 70000.00),
+(30, 'David', 'Roberts', 5, '2021-10-09', 75000.00),
+(31, 'Grace', 'Evans', 6, '2022-07-17', 47000.00),
+(32, 'Jackson', 'Wright', 7, '2020-01-09', 52000.00),
+(33, 'Lily', 'Green', 8, '2019-06-25', 59000.00),
+(34, 'Michael', 'Hall', 9, '2021-02-12', 62000.00),
+(35, 'Mia', 'Allen', 10, '2022-05-21', 71000.00),
+(36, 'Leo', 'Gonzalez', 1, '2020-07-06', 48000.00),
+(37, 'Chloe', 'King', 2, '2022-12-01', 51000.00),
+(38, 'Jack', 'Lee', 3, '2019-11-15', 57000.00),
+(39, 'Benjamin', 'Harris', 4, '2022-09-28', 67000.00),
+(40, 'Natalie', 'Young', 5, '2018-10-30', 73000.00),
+(41, 'Zoe', 'Carter', 6, '2020-02-18', 46000.00),
+(42, 'Elijah', 'Roberts', 7, '2021-01-04', 51000.00),
+(43, 'Ava', 'Martinez', 8, '2022-07-30', 64000.00),
+(44, 'Samuel', 'Perez', 9, '2021-11-20', 66000.00),
+(45, 'Jacob', 'Wilson', 10, '2019-03-15', 72000.00),
+(46, 'Charlotte', 'Johnson', 1, '2022-02-10', 47000.00),
+(47, 'William', 'Davis', 2, '2018-07-01', 50000.00),
+(48, 'Henry', 'Rodriguez', 3, '2021-04-05', 59000.00),
+(49, 'Oliver', 'Martinez', 4, '2020-06-08', 64000.00),
+(50, 'Amelia', 'Walker', 5, '2019-12-20', 74000.00),
+(51, 'Liam', 'Hall', 6, '2021-07-30', 49000.00),
+(52, 'Evelyn', 'Adams', 7, '2022-10-13', 53000.00),
+(53, 'James', 'Thomas', 8, '2021-12-19', 60000.00),
+(54, 'Scarlett', 'Taylor', 9, '2020-03-25', 66000.00),
+(55, 'Ethan', 'Williams', 10, '2021-02-14', 71000.00),
+(56, 'Olivia', 'Young', 1, '2022-11-01', 48000.00),
+(57, 'Jack', 'Miller', 2, '2020-10-05', 52000.00),
+(58, 'Mason', 'Wilson', 3, '2021-08-29', 56000.00),
+(59, 'Sophie', 'Gonzalez', 4, '2022-01-12', 65000.00),
+(60, 'Zane', 'Carter', 5, '2020-12-16', 72000.00),
+(61, 'Harper', 'Roberts', 6, '2021-04-22', 49000.00),
+(62, 'William', 'Harris', 7, '2019-05-07', 52000.00),
+(63, 'Zoe', 'Perez', 8, '2021-11-02', 57000.00),
+(64, 'Noah', 'Lee', 9, '2020-07-17', 61000.00),
+(65, 'Ella', 'Nelson', 10, '2019-01-03', 70000.00),
+(66, 'Samuel', 'Gonzalez', 1, '2021-06-14', 48000.00),
+(67, 'Jacob', 'Carter', 2, '2020-12-01', 51000.00),
+(68, 'Samantha', 'Davis', 3, '2022-03-18', 58000.00),
+(69, 'Grace', 'Lee', 4, '2021-10-06', 63000.00),
+(70, 'Lucas', 'Martinez', 5, '2019-05-12', 74000.00),
+(71, 'Amos', 'Young', 6, '2022-08-20', 49000.00),
+(72, 'Ethan', 'Roberts', 7, '2020-02-06', 52000.00),
+(73, 'Sophie', 'Adams', 8, '2021-09-28', 57000.00),
+(74, 'Mason', 'Carter', 9, '2019-12-11', 63000.00),
+(75, 'Olivia', 'Taylor', 10, '2020-03-24', 71000.00),
+(76, 'William', 'Johnson', 1, '2022-10-10', 46000.00),
+(77, 'Charlotte', 'Wilson', 2, '2021-04-13', 49000.00),
+(78, 'James', 'Gonzalez', 3, '2020-11-03', 58000.00),
+(79, 'Amelia', 'Harris', 4, '2022-06-16', 64000.00),
+(80, 'Sophie', 'Roberts', 5, '2019-08-12', 75000.00),
+(81, 'Liam', 'Harris', 6, '2021-12-08', 50000.00),
+(82, 'Lucas', 'Gonzalez', 7, '2020-09-22', 53000.00),
+(83, 'Grace', 'Taylor', 8, '2021-03-28', 59000.00),
+(84, 'Samantha', 'Roberts', 9, '2022-05-09', 66000.00),
+(85, 'Noah', 'Carter', 10, '2019-04-20', 72000.00),
+(86, 'Chloe', 'Mitchell', 1, '2022-01-15', 49000.00),
+(87, 'Amos', 'King', 2, '2020-02-12', 52000.00),
+(88, 'Lily', 'Harris', 3, '2022-09-01', 56000.00),
+(89, 'Elijah', 'Taylor', 4, '2020-08-21', 60000.00),
+(90, 'Zane', 'Nelson', 5, '2019-10-03', 73000.00),
+(91, 'Zoe', 'Roberts', 6, '2021-10-19', 48000.00),
+(92, 'Noah', 'Walker', 7, '2020-11-08', 51000.00),
+(93, 'Sophie', 'Mitchell', 8, '2022-03-11', 58000.00),
+(94, 'David', 'Gonzalez', 9, '2021-08-05', 63000.00),
+(95, 'Mason', 'Johnson', 10, '2020-07-12', 72000.00),
+(96, 'Ethan', 'Taylor', 1, '2021-09-09', 48000.00),
+(97, 'Lily', 'Roberts', 2, '2022-04-16', 52000.00),
+(98, 'Charlotte', 'King', 3, '2019-03-11', 59000.00),
+(99, 'Sophia', 'Wilson', 4, '2020-12-15', 64000.00),
+(100, 'William', 'Taylor', 5, '2022-02-18', 75000.00);
+
+INSERT INTO Departments (department_id, department_name, manager_id)
+VALUES
+(1, 'Human Resources', 5),        -- HR managed by employee 5
+(2, 'Sales', 6),                  -- Sales managed by employee 6
+(3, 'Marketing', 7),              -- Marketing managed by employee 7
+(4, 'Finance', 8),                -- Finance managed by employee 8
+(5, 'IT', 9),                     -- IT managed by employee 9
+(6, 'Legal', 10),                 -- Legal managed by employee 10
+(7, 'Customer Service', 11),      -- Customer Service managed by employee 11
+(8, 'Operations', 12),            -- Operations managed by employee 12
+(9, 'Product Management', 13),    -- Product Management managed by employee 13
+(10, 'Research & Development', 14), -- R&D managed by employee 14
+(11, 'Quality Assurance', 15),    -- QA managed by employee 15
+(12, 'Business Development', 16), -- Business Development managed by employee 16
+(13, 'Supply Chain', 17),         -- Supply Chain managed by employee 17
+(14, 'Procurement', 18),          -- Procurement managed by employee 18
+(15, 'Training', 19),             -- Training managed by employee 19
+(16, 'Public Relations', 20),     -- Public Relations managed by employee 20
+(17, 'Corporate Strategy', 21),   -- Corporate Strategy managed by employee 21
+(18, 'Internal Audit', 22),       -- Internal Audit managed by employee 22
+(19, 'Security', 23),             -- Security managed by employee 23
+(20, 'Product Design', 24),       -- Product Design managed by employee 24
+(21, 'Logistics', 25),            -- Logistics managed by employee 25
+(22, 'Branding', 26),             -- Branding managed by employee 26
+(23, 'Innovation', 27),           -- Innovation managed by employee 27
+(24, 'Content Creation', 28),     -- Content Creation managed by employee 28
+(25, 'Technology Solutions', 29), -- Technology Solutions managed by employee 29
+(26, 'Event Management', 30),     -- Event Management managed by employee 30
+(27, 'Legal Affairs', 31),        -- Legal Affairs managed by employee 31
+(28, 'Market Research', 32),      -- Market Research managed by employee 32
+(29, 'Corporate Affairs', 33),    -- Corporate Affairs managed by employee 33
+(30, 'Compliance', 34),           -- Compliance managed by employee 34
+(31, 'Business Intelligence', 35), -- Business Intelligence managed by employee 35
+(32, 'Customer Success', 36),     -- Customer Success managed by employee 36
+(33, 'Retail', 37),               -- Retail managed by employee 37
+(34, 'Design', 38),               -- Design managed by employee 38
+(35, 'Business Solutions', 39),   -- Business Solutions managed by employee 39
+(36, 'Data Analytics', 40),       -- Data Analytics managed by employee 40
+(37, 'Global Operations', 41),    -- Global Operations managed by employee 41
+(38, 'Corporate Development', 42), -- Corporate Development managed by employee 42
+(39, 'Financial Planning', 43),   -- Financial Planning managed by employee 43
+(40, 'Operations Management', 44), -- Operations Management managed by employee 44
+(41, 'Legal Compliance', 45),     -- Legal Compliance managed by employee 45
+(42, 'Strategic Partnerships', 46), -- Strategic Partnerships managed by employee 46
+(43, 'Engineering', 47),          -- Engineering managed by employee 47
+(44, 'Customer Relations', 48),   -- Customer Relations managed by employee 48
+(45, 'Product Marketing', 49),    -- Product Marketing managed by employee 49
+(46, 'HR Operations', 50),        -- HR Operations managed by employee 50
+(47, 'Risk Management', 51),      -- Risk Management managed by employee 51
+(48, 'Supply Chain Management', 52), -- Supply Chain Management managed by employee 52
+(49, 'Digital Marketing', 53),    -- Digital Marketing managed by employee 53
+(50, 'Creative Services', 54);    -- Creative Services managed by employee 54
+
+INSERT INTO Projects (Project_ID, Project_Name, Start_Date, End_Date) VALUES
+(1, 'Website Redesign', '2024-01-01', '2024-01-15'),
+(2, 'Mobile App Development', '2024-02-01', '2024-03-15'),
+(3, 'Marketing Campaign Launch', '2024-03-01', '2024-03-20'),
+(4, 'Product Research', '2024-02-10', '2024-04-10'),
+(5, 'Annual Financial Audit', '2024-01-05', '2024-01-25'),
+(6, 'Customer Support System Upgrade', '2024-04-01', '2024-06-01'),
+(7, 'Employee Training Program', '2024-05-01', '2024-05-30'),
+(8, 'Infrastructure Overhaul', '2024-06-01', '2024-08-01'),
+(9, 'Software Release 2024.1', '2024-03-15', '2024-04-30'),
+(10, 'Office Relocation', '2024-07-01', '2024-08-15'),
+(11, 'Client Feedback Integration', '2024-08-01', '2024-08-20'),
+(12, 'New Product Launch', '2024-09-01', '2024-12-01'),
+(13, 'Vendor Management Program', '2024-05-10', '2024-07-10'),
+(14, 'Market Research Expansion', '2024-06-15', '2024-09-15'),
+(15, 'Cloud Migration', '2024-07-01', '2024-09-30'),
+(16, 'Sales Strategy Overhaul', '2024-08-01', '2024-09-01'),
+(17, 'IT System Security Upgrade', '2024-09-10', '2024-11-10'),
+(18, 'Customer Satisfaction Survey', '2024-11-01', '2024-11-15'),
+(19, 'ERP Implementation', '2024-12-01', '2025-02-28'),
+(20, 'Product Photography', '2024-03-01', '2024-03-10'),
+(21, 'Marketing Strategy Revamp', '2024-02-20', '2024-04-10'),
+(22, 'Team Building Exercise', '2024-06-10', '2024-06-20'),
+(23, 'Website SEO Improvement', '2024-07-05', '2024-07-25'),
+(24, 'Conference Organization', '2024-09-01', '2024-09-30'),
+(25, 'Social Media Campaign', '2024-10-01', '2024-12-01'),
+(26, 'Financial System Upgrade', '2024-02-01', '2024-04-01'),
+(27, 'Customer Onboarding System', '2024-08-01', '2024-09-01'),
+(28, 'Branding and Logo Redesign', '2024-03-01', '2024-04-01'),
+(29, 'Legal Compliance Update', '2024-04-01', '2024-04-30'),
+(30, 'International Expansion', '2024-05-01', '2024-10-01'),
+(31, 'Employee Satisfaction Survey', '2024-06-01', '2024-06-15'),
+(32, 'Content Creation Workshop', '2024-03-15', '2024-04-15'),
+(33, 'Social Media Influencer Collaboration', '2024-07-01', '2024-08-01'),
+(34, 'Virtual Conference Setup', '2024-09-01', '2024-09-15'),
+(35, 'Product Supply Chain Optimization', '2024-01-01', '2024-02-01'),
+(36, 'R&D for New Service', '2024-05-01', '2024-08-01'),
+(37, 'Customer Relationship Management System', '2024-06-01', '2024-07-01'),
+(38, 'Internal Portal Upgrade', '2024-08-15', '2024-09-30'),
+(39, 'Website Content Strategy', '2024-09-15', '2024-10-15'),
+(40, 'Employee Health Program', '2024-01-01', '2024-01-15'),
+(41, 'International Trade Show', '2024-10-01', '2024-10-30'),
+(42, 'Mobile App Enhancement', '2024-02-15', '2024-03-30'),
+(43, 'Partner Network Development', '2024-03-01', '2024-06-01'),
+(44, 'Company Annual Review', '2024-04-01', '2024-04-15'),
+(45, 'SEO and Content Strategy', '2024-05-15', '2024-07-15'),
+(46, 'Product Packaging Redesign', '2024-06-01', '2024-06-30'),
+(47, 'Social Responsibility Program', '2024-08-01', '2024-08-31'),
+(48, 'Data Privacy Compliance', '2024-09-01', '2024-09-30'),
+(49, 'Employee Onboarding System', '2024-07-01', '2024-08-01'),
+(50, 'Website User Experience Testing', '2024-06-15', '2024-07-15'),
+(51, 'Sales Process Automation', '2024-02-01', '2024-03-01'),
+(52, 'Marketing Analytics', '2024-08-01', '2024-08-31'),
+(53, 'IT Infrastructure Expansion', '2024-05-01', '2024-07-01'),
+(54, 'Customer Data Management System', '2024-07-10', '2024-09-10'),
+(55, 'New HR System Implementation', '2024-03-01', '2024-04-01'),
+(56, 'Office Automation', '2024-01-10', '2024-03-10'),
+(57, 'Market Expansion in Asia', '2024-06-01', '2024-12-01'),
+(58, 'Employee Benefits Overhaul', '2024-08-10', '2024-09-30'),
+(59, 'Brand Awareness Campaign', '2024-07-01', '2024-09-01'),
+(60, 'Global Sales Strategy', '2024-05-01', '2024-08-01'),
+(61, 'Web Application Optimization', '2024-03-01', '2024-03-20'),
+(62, 'Digital Transformation', '2024-04-01', '2024-07-01'),
+(63, 'Sustainability Program', '2024-08-01', '2024-10-01'),
+(64, 'IT Disaster Recovery Plan', '2024-06-01', '2024-06-30'),
+(65, 'Cloud Backup Strategy', '2024-09-15', '2024-10-15'),
+(66, 'Business Analytics Tool Development', '2024-05-01', '2024-06-01'),
+(67, 'Cross-Department Collaboration', '2024-08-01', '2024-08-31'),
+(68, 'Digital Marketing Program', '2024-11-01', '2024-11-30'),
+(69, 'AI Integration for Operations', '2024-09-01', '2024-12-01'),
+(70, 'Cloud Infrastructure Scaling', '2024-10-01', '2024-12-01');
+
+INSERT INTO Employee_Projects (employee_id, project_id, hours_logged, allocation_date) VALUES
+(1, 1, 120.50, '2024-01-01'),
+(1, 2, 80.25, '2024-01-10'),
+(2, 3, 50.00, '2024-02-01'),
+(3, 4, 100.75, '2024-02-05'),
+(4, 5, 75.00, '2024-02-10'),
+(5, 6, 130.00, '2024-03-01'),
+(6, 7, 95.00, '2024-03-10'),
+(7, 8, 110.50, '2024-04-01'),
+(8, 9, 140.75, '2024-04-15'),
+(9, 10, 60.25, '2024-05-01'),
+(10, 11, 85.00, '2024-05-10'),
+(10, 12, 72.50, '2024-05-20'),
+(11, 13, 100.00, '2024-06-01'),
+(12, 14, 110.50, '2024-06-10'),
+(13, 15, 115.25, '2024-07-01'),
+(14, 16, 125.00, '2024-07-05'),
+(15, 17, 75.50, '2024-08-01'),
+(16, 18, 60.25, '2024-08-15'),
+(17, 19, 90.00, '2024-09-01'),
+(18, 20, 120.00, '2024-09-05'),
+(19, 21, 110.00, '2024-10-01'),
+(19, 22, 95.50, '2024-10-10'),
+(20, 23, 140.00, '2024-11-01'),
+(21, 24, 135.25, '2024-11-10'),
+(22, 25, 80.00, '2024-12-01'),
+(23, 26, 100.50, '2024-12-05'),
+(24, 27, 50.00, '2024-12-15'),
+(25, 28, 75.50, '2024-12-20'),
+(25, 29, 90.00, '2024-12-25'),
+(26, 30, 85.50, '2024-12-30'),
+(27, 31, 95.00, '2024-11-05'),
+(28, 32, 110.75, '2024-10-20'),
+(29, 33, 120.25, '2024-09-25'),
+(30, 34, 100.00, '2024-08-01'),
+(30, 35, 105.50, '2024-08-15'),
+(31, 36, 95.50, '2024-07-10'),
+(32, 37, 120.00, '2024-06-05'),
+(33, 38, 130.00, '2024-05-01'),
+(34, 39, 115.00, '2024-04-15'),
+(35, 40, 80.50, '2024-03-10'),
+(36, 41, 100.25, '2024-02-01'),
+(37, 42, 75.00, '2024-01-15'),
+(38, 43, 90.75, '2024-01-20'),
+(39, 44, 110.00, '2024-02-05'),
+(40, 45, 125.00, '2024-03-01'),
+(41, 46, 130.00, '2024-03-10'),
+(42, 47, 95.00, '2024-04-01'),
+(43, 48, 110.25, '2024-04-10'),
+(44, 49, 70.50, '2024-05-01'),
+(45, 50, 85.00, '2024-06-01'),
+(46, 51, 120.00, '2024-07-01'),
+(47, 52, 100.75, '2024-08-01'),
+(48, 53, 75.00, '2024-08-10'),
+(49, 54, 85.50, '2024-09-01'),
+(50, 55, 115.00, '2024-09-05'),
+(51, 56, 100.00, '2024-10-01'),
+(52, 57, 105.50, '2024-10-15'),
+(53, 58, 90.00, '2024-11-01'),
+(54, 59, 80.50, '2024-11-15'),
+(55, 60, 110.25, '2024-12-01'),
+(56, 61, 95.00, '2024-12-05'),
+(57, 62, 120.00, '2024-12-15'),
+(58, 63, 75.50, '2024-12-20'),
+(59, 64, 90.00, '2024-12-25'),
+(60, 65, 105.50, '2024-12-30'),
+(61, 66, 85.00, '2024-01-01'),
+(62, 67, 115.25, '2024-02-01'),
+(63, 68, 120.50, '2024-03-01'),
+(64, 69, 100.75, '2024-04-01'),
+(65, 70, 110.00, '2024-05-01'),
+(66, 1, 90.50, '2024-06-01'),
+(67, 2, 120.00, '2024-07-01'),
+(68, 3, 100.50, '2024-08-01'),
+(69, 4, 130.00, '2024-09-01'),
+(70, 5, 95.75, '2024-10-01'),
+(71, 6, 110.00, '2024-11-01'),
+(72, 7, 100.00, '2024-12-01'),
+(73, 8, 115.50, '2024-12-05'),
+(74, 9, 85.25, '2024-01-01'),
+(75, 10, 120.75, '2024-02-01'),
+(76, 11, 90.50, '2024-03-01'),
+(77, 12, 80.25, '2024-04-01'),
+(78, 13, 105.00, '2024-05-01'),
+(79, 14, 100.00, '2024-06-01'),
+(80, 15, 120.00, '2024-07-01'),
+(81, 16, 115.50, '2024-08-01'),
+(82, 17, 95.00, '2024-09-01'),
+(83, 18, 90.00, '2024-10-01'),
+(84, 19, 85.50, '2024-11-01'),
+(85, 20, 75.00, '2024-12-01'),
+(86, 21, 100.25, '2024-01-01'),
+(87, 22, 110.00, '2024-02-01'),
+(88, 23, 95.00, '2024-03-01'),
+(89, 24, 105.00, '2024-04-01'),
+(90, 25, 100.50, '2024-05-01'),
+(91, 26, 115.75, '2024-06-01'),
+(92, 27, 90.00, '2024-07-01'),
+(93, 28, 125.00, '2024-08-01'),
+(94, 29, 80.50, '2024-09-01'),
+(95, 30, 95.00, '2024-10-01'),
+(96, 31, 115.25, '2024-11-01'),
+(97, 32, 100.50, '2024-12-01'),
+(98, 33, 105.00, '2024-01-01'),
+(99, 34, 95.00, '2024-02-01'),
+(100, 35, 100.25, '2024-03-01'),
+(101, 1, 110.00, '2024-01-01'),
+(102, 2, 85.50, '2024-01-05'),
+(103, 3, 120.00, '2024-01-10'),
+(104, 4, 100.50, '2024-01-15'),
+(105, 5, 95.75, '2024-01-20'),
+(106, 6, 105.25, '2024-01-25'),
+(107, 7, 110.00, '2024-01-30'),
+(108, 8, 115.50, '2024-02-01'),
+(109, 9, 120.00, '2024-02-05'),
+(110, 10, 130.25, '2024-02-10'),
+(111, 11, 80.00, '2024-02-15'),
+(112, 12, 95.50, '2024-02-20'),
+(113, 13, 100.75, '2024-02-25'),
+(114, 14, 110.50, '2024-03-01'),
+(115, 15, 85.25, '2024-03-05'),
+(116, 16, 120.00, '2024-03-10'),
+(117, 17, 95.00, '2024-03-15'),
+(118, 18, 110.50, '2024-03-20'),
+(119, 19, 100.25, '2024-03-25'),
+(120, 20, 130.00, '2024-04-01'),
+(121, 21, 120.00, '2024-04-05'),
+(122, 22, 115.75, '2024-04-10'),
+(123, 23, 110.00, '2024-04-15'),
+(124, 24, 95.00, '2024-04-20'),
+(125, 25, 90.50, '2024-04-25'),
+(126, 26, 100.00, '2024-05-01'),
+(127, 27, 105.25, '2024-05-05'),
+(128, 28, 95.50, '2024-05-10'),
+(129, 29, 120.00, '2024-05-15'),
+(130, 30, 115.00, '2024-05-20'),
+(131, 31, 110.75, '2024-06-01'),
+(132, 32, 100.00, '2024-06-05'),
+(133, 33, 85.50, '2024-06-10'),
+(134, 34, 105.00, '2024-06-15'),
+(135, 35, 120.00, '2024-06-20'),
+(136, 36, 95.00, '2024-06-25'),
+(137, 37, 110.50, '2024-07-01'),
+(138, 38, 100.75, '2024-07-05'),
+(139, 39, 85.00, '2024-07-10'),
+(140, 40, 95.50, '2024-07-15'),
+(141, 41, 115.00, '2024-07-20'),
+(142, 42, 110.00, '2024-07-25'),
+(143, 43, 120.00, '2024-08-01'),
+(144, 44, 100.50, '2024-08-05'),
+(145, 45, 105.00, '2024-08-10'),
+(146, 46, 90.00, '2024-08-15'),
+(147, 47, 115.75, '2024-08-20'),
+(148, 48, 130.00, '2024-08-25'),
+(149, 49, 100.50, '2024-09-01'),
+(150, 50, 95.00, '2024-09-05'),
+(151, 51, 110.00, '2024-09-10'),
+(152, 52, 85.50, '2024-09-15'),
+(153, 53, 105.25, '2024-09-20'),
+(154, 54, 100.00, '2024-09-25'),
+(155, 55, 90.50, '2024-10-01'),
+(156, 56, 95.75, '2024-10-05'),
+(157, 57, 110.50, '2024-10-10'),
+(158, 58, 100.00, '2024-10-15'),
+(159, 59, 115.00, '2024-10-20'),
+(160, 60, 95.50, '2024-10-25'),
+(161, 61, 110.00, '2024-11-01'),
+(162, 62, 120.25, '2024-11-05'),
+(163, 63, 105.75, '2024-11-10'),
+(164, 64, 90.50, '2024-11-15'),
+(165, 65, 100.00, '2024-11-20'),
+(166, 66, 115.00, '2024-11-25'),
+(167, 67, 120.00, '2024-12-01'),
+(168, 68, 110.50, '2024-12-05'),
+(169, 69, 105.25, '2024-12-10'),
+(170, 70, 95.00, '2024-12-15'),
+(171, 1, 110.50, '2024-12-20'),
+(172, 2, 120.00, '2024-12-25'),
+(173, 3, 115.75, '2024-12-30'),
+(174, 4, 90.00, '2024-12-05'),
+(175, 5, 85.25, '2024-12-10'),
+(176, 6, 95.00, '2024-12-15'),
+(177, 7, 100.50, '2024-12-20'),
+(178, 8, 110.00, '2024-12-25'),
+(179, 9, 120.00, '2024-12-30'),
+(180, 10, 110.50, '2024-01-01'),
+(181, 11, 100.00, '2024-01-05'),
+(182, 12, 105.25, '2024-01-10'),
+(183, 13, 110.50, '2024-01-15'),
+(184, 14, 95.00, '2024-01-20'),
+(185, 15, 120.00, '2024-01-25'),
+(186, 16, 85.50, '2024-02-01'),
+(187, 17, 100.00, '2024-02-05'),
+(188, 18, 115.00, '2024-02-10'),
+(189, 19, 105.00, '2024-02-15'),
+(190, 20, 110.00, '2024-02-20'),
+(191, 21, 90.00, '2024-02-25'),
+(192, 22, 120.00, '2024-03-01'),
+(193, 23, 110.75, '2024-03-05'),
+(194, 24, 100.50, '2024-03-10'),
+(195, 25, 115.00, '2024-03-15'),
+(196, 26, 120.00, '2024-03-20'),
+(197, 27, 105.50, '2024-03-25'),
+(198, 28, 100.00, '2024-04-01'),
+(199, 29, 85.00, '2024-04-05'),
+(200, 30, 95.75, '2024-04-10'),
+(201, 31, 100.00, '2024-04-15'),
+(202, 32, 110.50, '2024-04-20'),
+(203, 33, 120.25, '2024-04-25'),
+(204, 34, 95.00, '2024-05-01'),
+(205, 35, 100.00, '2024-05-05'),
+(206, 36, 115.50, '2024-05-10'),
+(207, 37, 105.25, '2024-05-15'),
+(208, 38, 110.00, '2024-05-20'),
+(209, 39, 95.00, '2024-05-25'),
+(210, 40, 100.75, '2024-06-01'),
+(211, 41, 115.00, '2024-06-05'),
+(212, 42, 105.00, '2024-06-10'),
+(213, 43, 90.00, '2024-06-15'),
+(214, 44, 120.00, '2024-06-20'),
+(215, 45, 100.50, '2024-06-25'),
+(216, 46, 105.00, '2024-07-01'),
+(217, 47, 100.00, '2024-07-05'),
+(218, 48, 90.50, '2024-07-10'),
+(219, 49, 85.00, '2024-07-15'),
+(220, 50, 120.00, '2024-07-20'),
+(221, 51, 115.25, '2024-07-25'),
+(222, 52, 95.50, '2024-08-01'),
+(223, 53, 105.00, '2024-08-05'),
+(224, 54, 100.75, '2024-08-10'),
+(225, 55, 120.00, '2024-08-15'),
+(226, 56, 95.50, '2024-08-20'),
+(227, 57, 110.00, '2024-08-25'),
+(228, 58, 85.50, '2024-09-01'),
+(229, 59, 90.00, '2024-09-05'),
+(230, 60, 115.00, '2024-09-10'),
+(231, 61, 100.00, '2024-09-15'),
+(232, 62, 110.50, '2024-09-20'),
+(233, 63, 120.00, '2024-09-25'),
+(234, 64, 100.25, '2024-10-01'),
+(235, 65, 110.75, '2024-10-05'),
+(236, 66, 95.00, '2024-10-10'),
+(237, 67, 120.00, '2024-10-15'),
+(238, 68, 85.50, '2024-10-20'),
+(239, 69, 95.50, '2024-10-25'),
+(240, 70, 100.00, '2024-11-01');
+
+INSERT INTO Transactions (transaction_id, employee_id, amount, transaction_date, transaction_type)
+VALUES
+(1, 1, 2500.00, '2024-01-01', 'Salary'),
+(2, 2, 3000.00, '2024-01-01', 'Salary'),
+(3, 3, 2800.00, '2024-01-01', 'Salary'),
+(4, 4, 3500.00, '2024-01-01', 'Salary'),
+(5, 5, 4000.00, '2024-01-01', 'Salary'),
+(6, 6, 3200.00, '2024-01-01', 'Salary'),
+(7, 7, 2900.00, '2024-01-01', 'Salary'),
+(8, 8, 3300.00, '2024-01-01', 'Salary'),
+(9, 9, 3100.00, '2024-01-01', 'Salary'),
+(10, 10, 2600.00, '2024-01-01', 'Salary'),
+(11, 1, 200.00, '2024-02-01', 'Bonus'),
+(12, 2, 250.00, '2024-02-01', 'Bonus'),
+(13, 3, 220.00, '2024-02-01', 'Bonus'),
+(14, 4, 300.00, '2024-02-01', 'Bonus'),
+(15, 5, 400.00, '2024-02-01', 'Bonus'),
+(16, 6, 350.00, '2024-02-01', 'Bonus'),
+(17, 7, 210.00, '2024-02-01', 'Bonus'),
+(18, 8, 280.00, '2024-02-01', 'Bonus'),
+(19, 9, 240.00, '2024-02-01', 'Bonus'),
+(20, 10, 220.00, '2024-02-01', 'Bonus'),
+(21, 1, 150.00, '2024-03-01', 'Deduction'),
+(22, 2, 180.00, '2024-03-01', 'Deduction'),
+(23, 3, 160.00, '2024-03-01', 'Deduction'),
+(24, 4, 200.00, '2024-03-01', 'Deduction'),
+(25, 5, 250.00, '2024-03-01', 'Deduction'),
+(26, 6, 210.00, '2024-03-01', 'Deduction'),
+(27, 7, 170.00, '2024-03-01', 'Deduction'),
+(28, 8, 220.00, '2024-03-01', 'Deduction'),
+(29, 9, 190.00, '2024-03-01', 'Deduction'),
+(30, 10, 160.00, '2024-03-01', 'Deduction'),
+(31, 1, 2500.00, '2024-04-01', 'Salary'),
+(32, 2, 3000.00, '2024-04-01', 'Salary'),
+(33, 3, 2800.00, '2024-04-01', 'Salary'),
+(34, 4, 3500.00, '2024-04-01', 'Salary'),
+(35, 5, 4000.00, '2024-04-01', 'Salary'),
+(36, 6, 3200.00, '2024-04-01', 'Salary'),
+(37, 7, 2900.00, '2024-04-01', 'Salary'),
+(38, 8, 3300.00, '2024-04-01', 'Salary'),
+(39, 9, 3100.00, '2024-04-01', 'Salary'),
+(40, 10, 2600.00, '2024-04-01', 'Salary'),
+(41, 1, 250.00, '2024-05-01', 'Bonus'),
+(42, 2, 300.00, '2024-05-01', 'Bonus'),
+(43, 3, 270.00, '2024-05-01', 'Bonus'),
+(44, 4, 350.00, '2024-05-01', 'Bonus'),
+(45, 5, 450.00, '2024-05-01', 'Bonus'),
+(46, 6, 380.00, '2024-05-01', 'Bonus'),
+(47, 7, 250.00, '2024-05-01', 'Bonus'),
+(48, 8, 300.00, '2024-05-01', 'Bonus'),
+(49, 9, 280.00, '2024-05-01', 'Bonus'),
+(50, 10, 260.00, '2024-05-01', 'Bonus'),
+(51, 1, 200.00, '2024-06-01', 'Deduction'),
+(52, 2, 220.00, '2024-06-01', 'Deduction'),
+(53, 3, 180.00, '2024-06-01', 'Deduction'),
+(54, 4, 230.00, '2024-06-01', 'Deduction'),
+(55, 5, 280.00, '2024-06-01', 'Deduction'),
+(56, 6, 240.00, '2024-06-01', 'Deduction'),
+(57, 7, 200.00, '2024-06-01', 'Deduction'),
+(58, 8, 240.00, '2024-06-01', 'Deduction'),
+(59, 9, 210.00, '2024-06-01', 'Deduction'),
+(60, 10, 180.00, '2024-06-01', 'Deduction'),
+(61, 1, 2500.00, '2024-07-01', 'Salary'),
+(62, 2, 3000.00, '2024-07-01', 'Salary'),
+(63, 3, 2800.00, '2024-07-01', 'Salary'),
+(64, 4, 3500.00, '2024-07-01', 'Salary'),
+(65, 5, 4000.00, '2024-07-01', 'Salary'),
+(66, 6, 3200.00, '2024-07-01', 'Salary'),
+(67, 7, 2900.00, '2024-07-01', 'Salary'),
+(68, 8, 3300.00, '2024-07-01', 'Salary'),
+(69, 9, 3100.00, '2024-07-01', 'Salary'),
+(70, 10, 2600.00, '2024-07-01', 'Salary'),
+(71, 1, 210.00, '2024-08-01', 'Bonus'),
+(72, 2, 250.00, '2024-08-01', 'Bonus'),
+(73, 3, 230.00, '2024-08-01', 'Bonus'),
+(74, 4, 290.00, '2024-08-01', 'Bonus'),
+(75, 5, 380.00, '2024-08-01', 'Bonus'),
+(76, 6, 340.00, '2024-08-01', 'Bonus'),
+(77, 7, 220.00, '2024-08-01', 'Bonus'),
+(78, 8, 260.00, '2024-08-01', 'Bonus'),
+(79, 9, 240.00, '2024-08-01', 'Bonus'),
+(80, 10, 220.00, '2024-08-01', 'Bonus'),
+(81, 1, 250.00, '2024-09-01', 'Deduction'),
+(82, 2, 270.00, '2024-09-01', 'Deduction'),
+(83, 3, 240.00, '2024-09-01', 'Deduction'),
+(84, 4, 280.00, '2024-09-01', 'Deduction'),
+(85, 5, 320.00, '2024-09-01', 'Deduction'),
+(86, 6, 270.00, '2024-09-01', 'Deduction'),
+(87, 7, 250.00, '2024-09-01', 'Deduction'),
+(88, 8, 270.00, '2024-09-01', 'Deduction'),
+(89, 9, 260.00, '2024-09-01', 'Deduction'),
+(90, 10, 230.00, '2024-09-01', 'Deduction'),
+(91, 1, 2500.00, '2024-10-01', 'Salary'),
+(92, 2, 3000.00, '2024-10-01', 'Salary'),
+(93, 3, 2800.00, '2024-10-01', 'Salary'),
+(94, 4, 3500.00, '2024-10-01', 'Salary'),
+(95, 5, 4000.00, '2024-10-01', 'Salary'),
+(96, 6, 3200.00, '2024-10-01', 'Salary'),
+(97, 7, 2900.00, '2024-10-01', 'Salary'),
+(98, 8, 3300.00, '2024-10-01', 'Salary'),
+(99, 9, 3100.00, '2024-10-01', 'Salary'),
+(100, 10, 2600.00, '2024-10-01', 'Salary'),
+(101, 1, 230.00, '2024-11-01', 'Bonus'),
+(102, 2, 270.00, '2024-11-01', 'Bonus'),
+(103, 3, 250.00, '2024-11-01', 'Bonus'),
+(104, 4, 310.00, '2024-11-01', 'Bonus'),
+(105, 5, 400.00, '2024-11-01', 'Bonus'),
+(106, 6, 350.00, '2024-11-01', 'Bonus'),
+(107, 7, 220.00, '2024-11-01', 'Bonus'),
+(108, 8, 260.00, '2024-11-01', 'Bonus'),
+(109, 9, 240.00, '2024-11-01', 'Bonus'),
+(110, 10, 220.00, '2024-11-01', 'Bonus'),
+(111, 1, 250.00, '2024-12-01', 'Deduction'),
+(112, 2, 280.00, '2024-12-01', 'Deduction'),
+(113, 3, 250.00, '2024-12-01', 'Deduction'),
+(114, 4, 300.00, '2024-12-01', 'Deduction'),
+(115, 5, 350.00, '2024-12-01', 'Deduction'),
+(116, 6, 290.00, '2024-12-01', 'Deduction'),
+(117, 7, 270.00, '2024-12-01', 'Deduction'),
+(118, 8, 300.00, '2024-12-01', 'Deduction'),
+(119, 9, 280.00, '2024-12-01', 'Deduction'),
+(120, 10, 250.00, '2024-12-01', 'Deduction'),
+(121, 1, 2500.00, '2024-12-01', 'Salary'),
+(122, 2, 3000.00, '2024-12-01', 'Salary'),
+(123, 3, 2800.00, '2024-12-01', 'Salary'),
+(124, 4, 3500.00, '2024-12-01', 'Salary'),
+(125, 5, 4000.00, '2024-12-01', 'Salary'),
+(126, 6, 3200.00, '2024-12-01', 'Salary'),
+(127, 7, 2900.00, '2024-12-01', 'Salary'),
+(128, 8, 3300.00, '2024-12-01', 'Salary'),
+(129, 9, 3100.00, '2024-12-01', 'Salary'),
+(130, 10, 2600.00, '2024-12-01', 'Salary'),
+(131, 1, 230.00, '2025-01-01', 'Bonus'),
+(132, 2, 270.00, '2025-01-01', 'Bonus'),
+(133, 3, 240.00, '2025-01-01', 'Bonus'),
+(134, 4, 290.00, '2025-01-01', 'Bonus'),
+(135, 5, 380.00, '2025-01-01', 'Bonus'),
+(136, 6, 340.00, '2025-01-01', 'Bonus'),
+(137, 7, 250.00, '2025-01-01', 'Bonus'),
+(138, 8, 290.00, '2025-01-01', 'Bonus'),
+(139, 9, 270.00, '2025-01-01', 'Bonus'),
+(140, 10, 250.00, '2025-01-01', 'Bonus'),
+(141, 1, 240.00, '2025-02-01', 'Deduction'),
+(142, 2, 260.00, '2025-02-01', 'Deduction'),
+(143, 3, 230.00, '2025-02-01', 'Deduction'),
+(144, 4, 270.00, '2025-02-01', 'Deduction'),
+(145, 5, 310.00, '2025-02-01', 'Deduction'),
+(146, 6, 270.00, '2025-02-01', 'Deduction'),
+(147, 7, 250.00, '2025-02-01', 'Deduction'),
+(148, 8, 270.00, '2025-02-01', 'Deduction'),
+(149, 9, 260.00, '2025-02-01', 'Deduction'),
+(150, 10, 230.00, '2025-02-01', 'Deduction'),
+(151, 1, 2500.00, '2025-02-01', 'Salary'),
+(152, 2, 3000.00, '2025-02-01', 'Salary'),
+(153, 3, 2800.00, '2025-02-01', 'Salary'),
+(154, 4, 3500.00, '2025-02-01', 'Salary'),
+(155, 5, 4000.00, '2025-02-01', 'Salary'),
+(156, 6, 3200.00, '2025-02-01', 'Salary'),
+(157, 7, 2900.00, '2025-02-01', 'Salary'),
+(158, 8, 3300.00, '2025-02-01', 'Salary'),
+(159, 9, 3100.00, '2025-02-01', 'Salary'),
+(160, 10, 2600.00, '2025-02-01', 'Salary'),
+(161, 1, 220.00, '2025-03-01', 'Bonus'),
+(162, 2, 240.00, '2025-03-01', 'Bonus'),
+(163, 3, 230.00, '2025-03-01', 'Bonus'),
+(164, 4, 270.00, '2025-03-01', 'Bonus'),
+(165, 5, 320.00, '2025-03-01', 'Bonus'),
+(166, 6, 290.00, '2025-03-01', 'Bonus'),
+(167, 7, 260.00, '2025-03-01', 'Bonus'),
+(168, 8, 280.00, '2025-03-01', 'Bonus'),
+(169, 9, 270.00, '2025-03-01', 'Bonus'),
+(170, 10, 240.00, '2025-03-01', 'Bonus'),
+(171, 1, 200.00, '2025-04-01', 'Deduction'),
+(172, 2, 220.00, '2025-04-01', 'Deduction'),
+(173, 3, 190.00, '2025-04-01', 'Deduction'),
+(174, 4, 230.00, '2025-04-01', 'Deduction'),
+(175, 5, 270.00, '2025-04-01', 'Deduction'),
+(176, 6, 240.00, '2025-04-01', 'Deduction'),
+(177, 7, 210.00, '2025-04-01', 'Deduction'),
+(178, 8, 240.00, '2025-04-01', 'Deduction'),
+(179, 9, 220.00, '2025-04-01', 'Deduction'),
+(180, 10, 200.00, '2025-04-01', 'Deduction'),
+(181, 1, 2500.00, '2025-04-01', 'Salary'),
+(182, 2, 3000.00, '2025-04-01', 'Salary'),
+(183, 3, 2800.00, '2025-04-01', 'Salary'),
+(184, 4, 3500.00, '2025-04-01', 'Salary'),
+(185, 5, 4000.00, '2025-04-01', 'Salary'),
+(186, 6, 3200.00, '2025-04-01', 'Salary'),
+(187, 7, 2900.00, '2025-04-01', 'Salary'),
+(188, 8, 3300.00, '2025-04-01', 'Salary'),
+(189, 9, 3100.00, '2025-04-01', 'Salary'),
+(190, 10, 2600.00, '2025-04-01', 'Salary'),
+(191, 1, 250.00, '2025-05-01', 'Bonus'),
+(192, 2, 300.00, '2025-05-01', 'Bonus'),
+(193, 3, 270.00, '2025-05-01', 'Bonus'),
+(194, 4, 350.00, '2025-05-01', 'Bonus'),
+(195, 5, 450.00, '2025-05-01', 'Bonus'),
+(196, 6, 380.00, '2025-05-01', 'Bonus'),
+(197, 7, 250.00, '2025-05-01', 'Bonus'),
+(198, 8, 300.00, '2025-05-01', 'Bonus'),
+(199, 9, 280.00, '2025-05-01', 'Bonus'),
+(200, 10, 260.00, '2025-05-01', 'Bonus');
+
+DQL (Data Query Language)
+=========================
+
+Practice Questions
++++++++++++++++++++
+
+Set 1: Self Joins, Aggregations, and Conditional Queries
+---------------------------------------------------------
+
+1. Write a query to fetch the names of employees and their department name.
+
+select e.first_name, e.last_name, d.department_name from employees e left join departments d on e.department_id where e.department_id = d.department_id;
+select e.first_name, e.last_name, d.department_name from employees e left join departments d on e.department_id = d.department_id;
+
+2. Find the total hours logged by each employee across all projects.
+
+select count(employee_id) from employees;
+select employee_id, sum(hours_logged) from employee_projects group by employee_id;
+select employee_id, sum(hours_logged) from employee_projects where employee_id in (select employee_id from employees) group by employee_id;
+[likewise project wise hours logged]
+select project_id, sum(hours_logged) from employee_projects group by project_id;
+select project_id, sum(hours_logged) from employee_projects where project_id in (select project_id from projects) group by project_id;
+
+3. Retrieve the department name and count of employees in each department.
+
+select count(department_id) from departments;
+select d.department_name, count(e.employee_id) from departments d, employees e where d.department_id = e.department_id group by e.department_id;
+
+SELECT d.department_name, COUNT(e.employee_id) AS employee_count
+FROM Departments d
+LEFT JOIN Employees e ON d.department_id = e.department_id
+GROUP BY d.department_name;
+
+4. Identify employees who work on more than 2 projects.
+
+SELECT e.employee_id, COUNT(DISTINCT ep.project_id) AS project_count
+FROM Employee_Projects ep
+JOIN Employees e ON ep.employee_id = e.employee_id
+GROUP BY e.employee_id
+HAVING COUNT(DISTINCT ep.project_id) > 2;
+
+5. Write a query to find employees who do not work on any project.
+
+insert into employees values (101, 'Kevin', 'Taylor', 2, '2023-08-14', 55000.00);
+insert into employees values (241, 'Bebe', 'Rexha', 2, '2023-08-14', 55000.00);
+
+select employee_id from employees where employee_id not in (select distinct(employee_id) from employee_projects);
+
+SELECT e.employee_id, e.first_name, e.last_name
+FROM Employees e
+LEFT JOIN Employee_Projects ep ON e.employee_id = ep.employee_id
+WHERE ep.project_id IS NULL;
+
+select * from employee_projects where employee_id=241;
+
+6. Find employees earning a salary greater than the average salary of their department.
+
+select department_id, round(avg(salary)) from employees group by department_id; 
+
+SELECT e.employee_id, e.first_name, e.last_name, e.salary, e.department_id
+FROM Employees e
+JOIN (
+    SELECT department_id, AVG(salary) AS avg_salary
+    FROM Employees
+    GROUP BY department_id
+) d_avg ON e.department_id = d_avg.department_id
+WHERE e.salary > d_avg.avg_salary;
+
+7. Write a query using a self join to display employee names along with their manager's name.
+
+(alter table - need to add manager_id - table definition shared initially is not complete)
+
+SELECT e.first_name AS Employee, m.first_name AS Manager
+FROM Employee e
+LEFT JOIN Employee m ON e.manager_id = m.employee_id;
+
+8. Identify projects where the total hours logged by all employees exceed 500.
+
+SELECT ep.project_id, SUM(ep.hours_logged) AS total_hours_logged
+FROM Employee_Projects ep
+GROUP BY ep.project_id
+HAVING SUM(ep.hours_logged) > 500;
+
+9. Retrieve the name of the department where the manager has the highest salary.
+
+# need to alter the table to add manager_id
+
+SELECT d.department_name
+FROM Employees e
+JOIN Employees m ON e.manager_id = m.employee_id
+JOIN Department d ON e.department_id = d.department_id
+WHERE m.salary = (
+    SELECT MAX(salary)
+    FROM Employee
+    WHERE employee_id IN (SELECT manager_id FROM Employee WHERE manager_id IS NOT NULL)
+);
+
+10. Display employees who have logged more than 40 hours on any project using a CASE statement to classify them as 'Overtime' or 'Normal.'
+
+SELECT 
+    e.employee_id,
+    e.employee_name,
+    SUM(ep.hours_logged) AS total_hours_logged,
+    CASE 
+        WHEN SUM(ep.hours_logged) > 40 THEN 'Overtime'
+        ELSE 'Normal'
+    END AS classification
+FROM Employee_Projects ep
+JOIN Employees e ON ep.employee_id = e.employee_id
+GROUP BY e.employee_id, e.first_name, e.last_name
+HAVING SUM(ep.hours_logged) > 40;
+
+11. Find employees who were hired after January 1, 2020, and have not been allocated to any projects.
+
+SELECT e.employee_id, e.employee_name, e.hire_date
+FROM Employees e
+LEFT JOIN Employee_Projects ep ON e.employee_id = ep.employee_id
+WHERE e.hire_date > '2020-01-01'
+AND ep.project_id IS NULL;
+
+12. Write a query to display employees whose total salary transactions (including bonuses/deductions) exceed 10,000.
+
+SELECT e.employee_id, e.employee_name, SUM(st.transaction_amount) AS total_salary_transactions
+FROM Employees e
+JOIN Salary_Transactions st ON e.employee_id = st.employee_id
+GROUP BY e.employee_id, e.employee_name
+HAVING SUM(st.transaction_amount) > 10000;
+
+13. Retrieve the transaction details of employees where the transaction type is "Bonus" and the amount is in the top 5% of all bonuses.
+
+SELECT st.employee_id, st.transaction_amount, st.transaction_date, st.transaction_type
+FROM Salary_Transactions st
+WHERE st.transaction_type = 'Bonus'
+AND st.transaction_amount >= (
+    SELECT PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY transaction_amount) 
+    FROM Salary_Transactions
+    WHERE transaction_type = 'Bonus'
+);
+
+14. List employees whose salary is the highest in their respective department.
+
+SELECT e.employee_id, e.first_name, e.last_name, e.salary, e.department_id
+FROM Employees e
+JOIN (
+    SELECT department_id, MAX(salary) AS max_salary
+    FROM Employees
+    GROUP BY department_id
+) d_max ON e.department_id = d_max.department_id
+WHERE e.salary = d_max.max_salary;
+
+15. Display the average hours logged by employees for each project.
+
+SELECT ep.project_id, AVG(ep.hours_logged) AS avg_hours_logged
+FROM Employee_Projects ep
+GROUP BY ep.project_id;
+
+16. Write a query to fetch all employees who belong to the same department as "John Doe" using self joins.
+
+SELECT e.employee_id, e.employee_name, e.department_id
+FROM Employees e
+JOIN Employees e2 ON e.department_id = e2.department_id
+WHERE e2.employee_name = 'John Doe' AND e.employee_id != e2.employee_id;
+
+17. Find the departments where no projects have started.
+
+SELECT d.department_id, d.department_name
+FROM Departments d
+LEFT JOIN Projects p ON d.department_id = p.department_id
+WHERE p.start_date IS NULL;
+
+18. Retrieve employee details for employees working on all projects.
+
+SELECT e.employee_id, e.employee_name, e.department_id
+FROM Employees e
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM Projects p
+    WHERE NOT EXISTS (
+        SELECT 1
+        FROM Employee_Projects ep
+        WHERE ep.employee_id = e.employee_id
+        AND ep.project_id = p.project_id
+    )
+);
+
+19. List employees whose names start with the letter 'A' and have logged more than 20 hours on any project.
+
+SELECT e.employee_id, e.employee_name, ep.project_id, ep.hours_logged
+FROM Employees e
+JOIN Employee_Projects ep ON e.employee_id = ep.employee_id
+WHERE e.employee_name LIKE 'A%' 
+AND ep.hours_logged > 20;
+
+20. Identify the total transactions per employee along with their latest transaction date.
+
+SELECT st.employee_id, SUM(st.transaction_amount) AS total_transactions, MAX(st.transaction_date) AS latest_transaction_date
+FROM Salary_Transactions st
+GROUP BY st.employee_id;
+
+Set 2: Advanced Queries with Joins, CASE, Aggregation
+------------------------------------------------------
+
+1. Write a query to list employees, their projects, and hours logged, with projects having more than 100 hours total.
+
+SELECT e.employee_id, e.employee_name, ep.project_id, ep.hours_logged
+FROM Employee_Projects ep
+JOIN Employee e ON ep.employee_id = e.employee_id
+JOIN (
+    SELECT project_id, SUM(hours_logged) AS total_hours
+    FROM Employee_Projects
+    GROUP BY project_id
+    HAVING SUM(hours_logged) > 100
+) p_total ON ep.project_id = p_total.project_id;
+
+2. Find employees with the most logged hours across all projects.
+
+SELECT e.employee_id, e.employee_name, SUM(ep.hours_logged) AS total_hours_logged
+FROM Employee_Projects ep
+JOIN Employee e ON ep.employee_id = e.employee_id
+GROUP BY e.employee_id, e.employee_name
+ORDER BY total_hours_logged DESC
+LIMIT 1;
+
+3. Display department names and the total salary paid to employees in each department.
+
+SELECT d.department_name, SUM(e.salary) AS total_salary
+FROM Employee e
+JOIN Department d ON e.department_id = d.department_id
+GROUP BY d.department_name;
+
+4. Retrieve employees whose salaries are above the average salary across the company.
+
+SELECT e.employee_id, e.employee_name, e.salary
+FROM Employee e
+WHERE e.salary > (SELECT AVG(salary) FROM Employee);
+
+5. Write a query to display projects that started after 2023 and do not have any employees assigned yet.
+
+SELECT p.project_id, p.project_name, p.start_date
+FROM Project p
+LEFT JOIN Employee_Projects ep ON p.project_id = ep.project_id
+WHERE p.start_date > '2023-12-31'
+AND ep.employee_id IS NULL;
+
+6. Using a CASE statement, classify transactions as "High Value" if the amount is greater than 5,000; otherwise, classify them as "Low Value."
+
+SELECT transaction_id, transaction_amount,
+       CASE
+           WHEN transaction_amount > 5000 THEN 'High Value'
+           ELSE 'Low Value'
+       END AS transaction_classification
+FROM Salary_Transactions;
+
+7. Identify the project(s) with the most employees assigned.
+
+SELECT ep.project_id, p.project_name, COUNT(ep.employee_id) AS employee_count
+FROM Employee_Projects ep
+JOIN Project p ON ep.project_id = p.project_id
+GROUP BY ep.project_id, p.project_name
+ORDER BY employee_count DESC
+LIMIT 1;
+
+8. Display departments and the count of employees earning below 50,000.
+
+SELECT d.department_name, COUNT(e.employee_id) AS employee_count
+FROM Employee e
+JOIN Department d ON e.department_id = d.department_id
+WHERE e.salary < 50000
+GROUP BY d.department_name;
+
+9. Write a query to find the 5 employees with the highest salaries who have worked on the most projects.
+
+SELECT e.employee_id, e.employee_name, e.salary, COUNT(ep.project_id) AS project_count
+FROM Employee e
+JOIN Employee_Projects ep ON e.employee_id = ep.employee_id
+GROUP BY e.employee_id, e.employee_name, e.salary
+ORDER BY project_count DESC, e.salary DESC
+LIMIT 5;
+
+10. Retrieve project names and the average hours logged per employee for each project.
+
+SELECT p.project_name, AVG(ep.hours_logged) AS avg_hours_logged
+FROM Employee_Projects ep
+JOIN Project p ON ep.project_id = p.project_id
+GROUP BY p.project_name;
+
+11. Write a query to display transaction amounts for employees hired in 2022 or later.
+
+SELECT e.employee_id, e.employee_name, st.transaction_amount
+FROM Employee e
+JOIN Salary_Transactions st ON e.employee_id = st.employee_id
+WHERE e.hire_date >= '2022-01-01';
+
+12. Identify employees who have not logged any hours on projects but have received salary transactions.
+
+SELECT e.employee_id, e.employee_name
+FROM Employee e
+LEFT JOIN Employee_Projects ep ON e.employee_id = ep.employee_id
+JOIN Salary_Transactions st ON e.employee_id = st.employee_id
+WHERE ep.employee_id IS NULL;
+
+13. Find departments with no employees using a LEFT JOIN.
+
+SELECT d.department_id, d.department_name
+FROM Department d
+LEFT JOIN Employee e ON d.department_id = e.department_id
+WHERE e.employee_id IS NULL;
+
+14. Retrieve the employees who have worked on more than one project and logged over 200 hours in total.
+
+SELECT e.employee_id, e.employee_name, SUM(ep.hours_logged) AS total_hours
+FROM Employee_Projects ep
+JOIN Employee e ON ep.employee_id = e.employee_id
+GROUP BY e.employee_id, e.employee_name
+HAVING COUNT(DISTINCT ep.project_id) > 1 AND SUM(ep.hours_logged) > 200;
+
+15. Write a query to fetch projects where no hours have been logged by employees.
+
+SELECT p.project_id, p.project_name
+FROM Projects p
+LEFT JOIN Employee_Projects ep ON p.project_id = ep.project_id
+WHERE ep.hours_logged IS NULL;
+
+16. Display employees who have received both a bonus and a deduction in their transactions.
+
+SELECT DISTINCT t1.employee_id, e.first_name, e.last_name
+FROM Transactions t1
+JOIN Transactions t2 ON t1.employee_id = t2.employee_id
+JOIN Employees e ON t1.employee_id = e.employee_id
+WHERE t1.transaction_type = 'Bonus'
+AND t2.transaction_type = 'Deduction';
+
+17. Identify employees with missing or null last_name values and classify them as "Data Issue."
+
+SELECT employee_id, first_name, last_name,
+       CASE
+           WHEN last_name IS NULL THEN 'Data Issue'
+           ELSE 'Valid Data'
+       END AS data_status
+FROM Employees
+WHERE last_name IS NULL;
+
+18. Using a self join, display pairs of employees in the same department with different salaries.
+
+SELECT e1.employee_id AS employee1_id, e1.first_name AS employee1_first_name, e1.last_name AS employee1_last_name,
+       e2.employee_id AS employee2_id, e2.first_name AS employee2_first_name, e2.last_name AS employee2_last_name
+FROM Employees e1
+JOIN Employees e2 ON e1.department_id = e2.department_id
+WHERE e1.employee_id != e2.employee_id
+AND e1.salary != e2.salary;
+
+19. Write a query to calculate the total hours logged for each employee and classify them into "High Performer" (> 100 hours) or "Normal Performer."
+
+SELECT e.employee_id, e.first_name, e.last_name,
+       SUM(ep.hours_logged) AS total_hours_logged,
+       CASE
+           WHEN SUM(ep.hours_logged) > 100 THEN 'High Performer'
+           ELSE 'Normal Performer'
+       END AS performance_classification
+FROM Employees e
+LEFT JOIN Employee_Projects ep ON e.employee_id = ep.employee_id
+GROUP BY e.employee_id, e.first_name, e.last_name;
+
+20. Find the latest transaction date for each employee who received a salary payment.
+
+SELECT t.employee_id, e.first_name, e.last_name, MAX(t.transaction_date) AS latest_transaction_date
+FROM Transactions t
+JOIN Employees e ON t.employee_id = e.employee_id
+WHERE t.transaction_type = 'Salary'
+GROUP BY t.employee_id, e.first_name, e.last_name;
+
+###########################################################
+######################TABLE STRUCTURE######################
+###########################################################
+1.
+Employees
+Represents employees in the company.
+Employees belong to one department.
+Column Name Data Type Description
+employee_id
+INT (PK) Unique identifier for each employee
+first_name
+VARCHAR(50) Employee's first name
+last_name
+VARCHAR(50) Employee's last name
+department_id
+INT (FK) Department to which the employee belongs
+hire_date
+DATE Date of hire
+salary
+DECIMAL(10,2) Employee's salary
+2.
+Departments
+Lists all departments in the company.
+Column Name Data Type Description
+department_id
+INT (PK) Unique identifier for each department
+department_name
+VARCHAR(100) Name of the department
+manager_id
+INT (FK) Manager (employee) for the department
+3.
+Projects
+Represents projects employees work on.
+Column Name Data Type Description
+project_id
+INT (PK) Unique identifier for each project
+project_name
+VARCHAR(100) Name of the project
+start_date
+DATE Start date of the project
+end_date
+DATE End date of the project
+4.
+Employee_Projects
+Represents assignments of employees to projects (many-to-many relationship).
+Column Name Data Type Description
+employee_id
+INT (FK) Reference to the employee
+project_id
+INT (FK) Reference to the project
+hours_logged
+DECIMAL(6,2) Total hours logged for the project
+allocation_date
+DATE Date when the allocation started
+5.
+Transactions
+Represents payments or transactions related to employee salaries.
+Column Name Data Type Description
+transaction_id
+INT (PK) Unique identifier for each transaction
+employee_id
+INT (FK) Employee for whom the transaction applies
+amount
+DECIMAL(10,2) Transaction amount
+transaction_date
+DATE Date of the transaction
+transaction_type
+VARCHAR(50) Type: Salary, Bonus, Deduction
+
+###########################################################
+###########################################################
+
+Test Data Requirements (Use any AI tool for this)
+
+1.
+Create the table as mentioned in Table Structures section
+#done
+
+2.
+Populate the tables with a minimum of
+100 rows
+in the
+Employees
+table, ensuring diversity in departments, salaries, and hire dates.
+#done
+
+3.
+Insert at least
+50 rows
+into the
+Departments
+table with varied department names and managers.
+#done
+
+4.
+Add
+50-70 rows
+in the
+Projects
+table with projects spanning different dates and durations.
+#done
+
+5.
+Populate the
+Employee_Projects
+table to create realistic many-to-many mappings, ensuring some employees work on multiple projects and others on none.
+#done
+
+6.
+Insert
+200 rows
+into the
+Transactions
+table with salary, bonus, and deduction transactions spread across employees.
+#done
+
+##############################
+#######OLD DATA INSERTS#######
+##############################
+
+update employees set department_id = 1 where employee_id in (1001, 1032, 1029, 1013);
+update employees set department_id = 2 where employee_id in (1003, 1002, 1005, 1004, 1008, 1015, 1011, 1012, 1010, 1020, 1021, 1026, 1027);
+update employees set department_id = 3 where employee_id in (1006, 1009, 1018, 1023);
+update employees set department_id = 4 where employee_id in (1007, 1030, 1031, 1024, 1028);
+update employees set department_id = 5 where employee_id in (1017, 1025, 1016, 1022, 1014, 1019);
+
+select * from projects;
+# project_id project_name start_date end_date
+insert into projects values (10001, "ProjectOne", '2020-05-01', '2030-05-01');
+insert into projects values (10002, "ProjectTwo", '2020-05-01', '2030-05-01');
+insert into projects values (10003, "ProjectThree", '2020-05-01', '2030-05-01');
+insert into projects values (10004, "ProjectFour", '2020-05-01', '2030-05-01');
+insert into projects values (10005, "ProjectFive", '2020-05-01', '2030-05-01');
+insert into projects values (10006, "ProjectSix", '2020-05-01', '2030-05-01');
+insert into projects values (10007, "ProjectSeven", '2020-05-01', '2030-05-01');
+insert into projects values (10008, "ProjectEight", '2020-05-01', '2030-05-01');
+insert into projects values (10009, "ProjectNine", '2020-05-01', '2030-05-01');
+
+## employee_id project_id hours_logged allocation_date
+## many to many relationship between employees and projects
+insert into employee_projects values (1001, 10001, 500, '2024-10-20'); #done
+insert into employee_projects values (1002, 10001, 500, '2024-10-20'); #done
+insert into employee_projects values (1003, 10001, 500, '2024-10-30'); #done
+insert into employee_projects values (1004, 10001, 500, '2024-10-30'); #done
+insert into employee_projects values (1005, 10001, 400, '2024-11-05'); #done
+insert into employee_projects values (1006, 10001, 400, '2024-11-05'); #done
+insert into employee_projects values (1007, 10001, 400, '2024-11-05'); #done
+insert into employee_projects values (1008, 10001, 400, '2024-11-05'); #done
+insert into employee_projects values (1009, 10001, 250, '2024-11-20'); #done
+insert into employee_projects values (1010, 10001, 250, '2024-11-20'); #done
+insert into employee_projects values (1011, 10001, 200, '2024-11-25'); #done
+insert into employee_projects values (1012, 10001, 200, '2024-11-25'); #done
+insert into employee_projects values (1013, 10001, 150, '2024-11-30'); #done
+insert into employee_projects values (1014, 10001, 150, '2024-11-30'); #done
+insert into employee_projects values (1015, 10001, 500, '2024-09-20'); #done
+insert into employee_projects values (1016, 10001, 500, '2024-09-20'); #done
+insert into employee_projects values (1017, 10001, 200, '2024-11-25'); #done
+insert into employee_projects values (1018, 10001, 500, '2024-09-30'); #done
+insert into employee_projects values (1019, 10001, 500, '2024-09-30'); #done
+insert into employee_projects values (1020, 10001, 500, '2024-09-30'); #done
+insert into employee_projects values (1021, 10001, 500, '2024-10-05'); #done
+insert into employee_projects values (1022, 10001, 500, '2024-10-05'); #done
+insert into employee_projects values (1023, 10001, 500, '2024-08-25'); #done
+insert into employee_projects values (1024, 10001, 500, '2024-08-25'); #done
+insert into employee_projects values (1025, 10001, 500, '2024-10-25'); #done
+insert into employee_projects values (1026, 10001, 500, '2024-08-25'); #done
+insert into employee_projects values (1027, 10001, 500, '2024-08-25'); #done 
+insert into employee_projects values (1028, 10001, 600, '2024-09-05'); #done
+insert into employee_projects values (1029, 10001, 600, '2024-09-05'); #done
+insert into employee_projects values (1030, 10001, 600, '2024-09-05'); #done
+insert into employee_projects values (1031, 10001, 600, '2024-09-05'); #done
+insert into employee_projects values (1032, 10001, 600, '2024-09-05'); #done
+insert into employee_projects values (1023, 10002, 100, '2024-10-20'); ##done
+insert into employee_projects values (1024, 10002, 100, '2024-10-20'); ##done
+insert into employee_projects values (1026, 10002, 100, '2024-10-20'); ##done
+insert into employee_projects values (1027, 10002, 100, '2024-10-20'); ##done
+insert into employee_projects values (1028, 10002, 100, '2024-11-15'); ##done
+insert into employee_projects values (1023, 10003, 100, '2024-04-10'); ###done
+insert into employee_projects values (1024, 10003, 100, '2024-04-10'); ###done
+insert into employee_projects values (1026, 10003, 100, '2024-04-10'); ###done
+insert into employee_projects values (1027, 10003, 100, '2024-04-10'); ###done
+insert into employee_projects values (1028, 10003, 100, '2024-12-02'); ###done
